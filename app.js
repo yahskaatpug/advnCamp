@@ -16,12 +16,14 @@ var express         = require("express"),
 var commentRoute    = require("./routes/comments"),
     campgroundRoute = require("./routes/campgrounds"),
     authRoute       = require("./routes/index");
-
+var Db = require('mongodb').Db,
+MongoClient = require('mongodb').MongoClient;
 // redisDemo.js 
 var redis = require('redis'); 
 var client = redis.createClient(); // this creates a new client
 //seedDB();
-mongoose.connect('mongodb://dbuser:qwerty123@ds251877.mlab.com:51877/yelpcamp');//mongodb://localhost:27017/ypcamp   
+MongoClient.connect('mongodb://dbuser:qwerty123@ds251877.mlab.com:51877/yelpcamp');
+//mongoose.connect('mongodb://dbuser:qwerty123@ds251877.mlab.com:51877/yelpcamp');//mongodb://localhost:27017/ypcamp   
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -55,6 +57,6 @@ client.on('connect', function() {
    console.log('Redis client connected');
  });
 
-app.listen(process.env.PORT || 3000, function(){
+app.listen(process.env.PORT || 8081, function(){
    console.log("YelpCamp application started!!!"); 
 });
